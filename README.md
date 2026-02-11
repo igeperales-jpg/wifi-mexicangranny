@@ -4,6 +4,12 @@
 ---
 
 ## � Bitácora de cambios
+### v2.2 — 11 de febrero de 2026
+**Fondo más claro**
+
+Cambios realizados:
+- **Fondo gris cálido**: Se cambió el fondo de negro profundo (#0a0a0a) a un gris oscuro cálido (#1b1b20). Las tarjetas (#242429) y elementos elevados (#2e2e34) se ajustaron proporcionalmente para mantener contraste sin ser tan oscuro.
+- **Theme-color actualizado**: La barra del navegador móvil ahora coincide con el nuevo fondo.
 ### v2.1 — 11 de febrero de 2026
 **Tarjeta web principal + nuevo fondo**
 
