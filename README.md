@@ -3,7 +3,37 @@
 
 ---
 
-## 📋 Datos de configuración
+## � Bitácora de cambios
+
+### v2.0 — 11 de febrero de 2026
+**Rediseño completo de la landing page + Sección de valoraciones**
+
+Cambios realizados:
+- **Diseño completamente nuevo**: Estilo dark/glassmorphism moderno con fondo oscuro (#0a0a0a), orbes de luz ambiental animados, tarjetas con bordes sutiles y tipografía Inter + Playfair Display.
+- **Iconografía profesional**: Se reemplazaron los emojis por iconos SVG de Lucide Icons para una apariencia más limpia y consistente.
+- **Fuente monoespaciada**: La contraseña ahora usa JetBrains Mono para mejor legibilidad.
+- **Animaciones scroll-reveal**: Los elementos aparecen con fade-in conforme el usuario hace scroll.
+- **Orbes de luz ambiental**: Esferas de color verde, dorado y rojo animadas en el fondo para dar profundidad.
+- **Sección de reseñas Google Maps**: Tarjeta con logo oficial de Google (SVG a 4 colores) y 5 estrellas doradas. Enlaza directamente a: `https://g.page/r/CeYUEbRsBPKQEBM/review`
+- **Sección de reseñas Tripadvisor**: Tarjeta con icono del búho de Tripadvisor (SVG) y 5 burbujas verdes. Enlaza a la ficha del restaurante en Tripadvisor.
+- **Banner motivacional**: Sección "¿Te ha gustado?" con mensaje que invita a dejar reseña en 30 segundos.
+- **Animación pulse**: Las tarjetas de reseña tienen una animación sutil de pulso dorado para atraer la atención.
+- **Toast mejorado**: Notificación de "copiado" ahora en verde con icono check, estilo pill flotante.
+- **Compatibilidad iPhone**: Se mantiene la sección oculta con perfil .mobileconfig que aparece solo en iOS.
+- **Backup**: Se guardó la versión anterior como `index_backup_v1.html`.
+
+### v1.0 — 11 de febrero de 2026
+**Versión inicial**
+- Landing page con datos WiFi (SSID + contraseña) con botones de copiar.
+- Código QR WiFi generado automáticamente.
+- Perfil .mobileconfig para conexión automática en iOS.
+- Enlace a mexicangranny.com.
+- Instrucciones de conexión paso a paso.
+- Herramienta generador-qr.html para imprimir QR.
+
+---
+
+## �📋 Datos de configuración
 
 | Campo | Valor |
 |-------|-------|
@@ -18,9 +48,12 @@
 
 ```
 wifi_mexican/
-├── index.html                      ← Landing page (página que ven los clientes)
+├── index.html                      ← Landing page v2 (diseño dark moderno + reseñas)
+├── index_backup_v1.html             ← Backup de la versión original
 ├── wifi-mexican-granny.mobileconfig ← Perfil iOS para conexión WiFi automática
-├── README.md                        ← Este archivo
+├── generador-qr.html               ← Herramienta para generar QR imprimible
+├── generate_index.py               ← Script generador del index.html
+├── README.md                        ← Este archivo (con bitácora)
 └── assets/                          ← (opcional) imágenes y recursos
 ```
 

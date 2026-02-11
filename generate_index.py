@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Script para generar el nuevo index.html con diseño dark moderno."""
+
+html = r'''<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -346,4 +349,8 @@
         });
     </script>
 </body>
-</html>
+</html>'''
+
+import pathlib
+pathlib.Path('/Users/edkanina/PROYECTOS/wifi_mexican/index.html').write_text(html, encoding='utf-8')
+print('OK - index.html escrito:', len(html), 'caracteres')

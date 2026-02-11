@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>WiFi Clientes - Mexican Granny</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1a5c2a;
+            --color-primary-dark: #0e3d1a;
+            --color-accent: #d4382c;
+            --color-accent-dark: #a82b21;
+            --color-gold: #c9a84c;
+            --color-gold-light: #f0dfa0;
+            --color-cream: #faf5e8;
+            --color-white: #ffffff;
+            --color-text: #2c2c2c;
+            --color-text-light: #666666;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-medium: 0 8px 32px rgba(0,0,0,0.12);
+            --shadow-strong: 0 12px 48px rgba(0,0,0,0.16);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, var(--color-primary-dark) 0%, var(--color-primary) 30%, var(--color-cream) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px 40px;
+            color: var(--color-text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === HEADER === */
+        .header {
+            text-align: center;
+            padding: 24px 0 20px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .header__icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
+        .header__title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--color-white);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .header__subtitle {
+            font-size: 14px;
+            color: var(--color-gold-light);
+            font-weight: 500;
+            margin-top: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* === MAIN CARD === */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-strong);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .card__header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card__header-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .card__header-text h2 {
+            color: var(--color-white);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .card__header-text p {
+            color: rgba(255,255,255,0.75);
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .card__body {
+            padding: 24px;
+        }
+
+        /* === WIFI INFO === */
+        .wifi-field {
+            margin-bottom: 18px;
+        }
+
+        .wifi-field:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .wifi-field__label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--color-text-light);
+            margin-bottom: 6px;
+        }
+
+        .wifi-field__value {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--color-cream);
+            border: 1.5px solid #e8e0cc;
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            transition: all 0.2s ease;
+        }
+
+        .wifi-field__value:active {
+            transform: scale(0.98);
+        }
+
+        .wifi-field__text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            word-break: break-all;
+        }
+
+        .wifi-field__text--password {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .wifi-field__copy {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .wifi-field__copy:active {
+            transform: scale(0.95);
+            background: var(--color-primary-dark);
+        }
+
+        .wifi-field__copy--copied {
+            background: var(--color-gold) !important;
+            color: var(--color-text) !important;
+        }
+
+        /* === QR CODE === */
+        .qr-section {
+            text-align: center;
+            padding: 20px 24px 24px;
+            border-top: 1.5px dashed #e8e0cc;
+        }
+
+        .qr-section__title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .qr-section__title::before,
+        .qr-section__title::after {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: #d0c8b0;
+        }
+
+        #qrcode {
+            display: inline-block;
+            padding: 12px;
+            background: white;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--color-cream);
+        }
+
+        #qrcode canvas {
+            display: block;
+        }
+
+        .qr-section__hint {
+            font-size: 12px;
+            color: var(--color-text-light);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* === iOS PROFILE === */
+        .ios-section {
+            padding: 0 24px 24px;
+        }
+
+        .ios-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .ios-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .ios-btn__icon {
+            font-size: 20px;
+        }
+
+        .ios-hint {
+            text-align: center;
+            font-size: 11px;
+            color: var(--color-text-light);
+            margin-top: 8px;
+        }
+
+        /* === WEBSITE BUTTON === */
+        .website-card {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-medium);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .website-btn {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .website-btn:active {
+            background: var(--color-cream);
+        }
+
+        .website-btn__icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .website-btn__text h3 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .website-btn__text p {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-top: 2px;
+        }
+
+        .website-btn__arrow {
+            margin-left: auto;
+            font-size: 20px;
+            color: #ccc;
+        }
+
+        /* === STEPS === */
+        .steps {
+            width: 100%;
+            max-width: 420px;
+            padding: 0 4px;
+            margin-bottom: 16px;
+        }
+
+        .steps__title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .step__number {
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step__text {
+            font-size: 14px;
+            color: var(--color-text);
+            line-height: 1.5;
+            padding-top: 3px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .footer__text {
+            font-size: 12px;
+            color: var(--color-text-light);
+        }
+
+        .footer__brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 4px;
+        }
+
+        /* === TOAST === */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--color-primary-dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: var(--shadow-strong);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            white-space: nowrap;
+        }
+
+        .toast--visible {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .website-card, .steps, .footer {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .website-card { animation-delay: 0.1s; }
+        .steps { animation-delay: 0.2s; }
+        .footer { animation-delay: 0.3s; }
+
+        /* === HIDDEN utility === */
+        .hidden-ios { display: none; }
+
+        @media (min-width: 480px) {
+            body {
+                padding: 32px 24px 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header__icon">🌮</div>
+        <h1 class="header__title">Mexican Granny</h1>
+        <p class="header__subtitle">WiFi Gratis para Clientes</p>
+    </div>
+
+    <!-- WIFI CARD -->
+    <div class="card">
+        <div class="card__header">
+            <div class="card__header-icon">📶</div>
+            <div class="card__header-text">
+                <h2>Conexión WiFi</h2>
+                <p>Conéctate a nuestra red</p>
+            </div>
+        </div>
+        <div class="card__body">
+            <!-- SSID -->
+            <div class="wifi-field">
+                <div class="wifi-field__label">Nombre de red (SSID)</div>
+                <div class="wifi-field__value">
+                    <span class="wifi-field__text" id="ssid-text">Clientes Mexican Granny</span>
+                    <button class="wifi-field__copy" onclick="copyText('Clientes Mexican Granny', this)">
+                        <span>📋</span> Copiar
+                    </button>
+                </div>
+            </div>
+            <!-- PASSWORD -->
+            <div class="wifi-field">
+                <div class="wifi-field__label">Contraseña</div>
+                <div class="wifi-field__value">
+                    <span class="wifi-field__text wifi-field__text--password" id="pass-text">ClientesMexican1966</span>
+                    <button class="wifi-field__copy" onclick="copyText('ClientesMexican1966', this)">
+                        <span>📋</span> Copiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR CODE -->
+        <div class="qr-section">
+            <div class="qr-section__title">Escanea con tu cámara</div>
+            <div id="qrcode"></div>
+            <p class="qr-section__hint">Abre la cámara de tu teléfono y apunta al código QR<br>para conectarte automáticamente</p>
+        </div>
+
+        <!-- iOS CONFIG PROFILE (solo visible en iOS) -->
+        <div class="ios-section hidden-ios" id="ios-section">
+            <a href="wifi-mexican-granny.mobileconfig" class="ios-btn" id="ios-config-btn">
+                <span class="ios-btn__icon"></span>
+                Conectar WiFi en iPhone
+            </a>
+            <p class="ios-hint">Instala el perfil de configuración para conectar automáticamente</p>
+        </div>
+    </div>
+
+    <!-- WEBSITE LINK -->
+    <div class="website-card">
+        <a href="https://mexicangranny.com/" target="_blank" rel="noopener" class="website-btn">
+            <div class="website-btn__icon">🌐</div>
+            <div class="website-btn__text">
+                <h3>Visita nuestra web</h3>
+                <p>mexicangranny.com</p>
+            </div>
+            <div class="website-btn__arrow">›</div>
+        </a>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps">
+        <div class="steps__title">¿Cómo conectarse?</div>
+        <div class="step">
+            <div class="step__number">1</div>
+            <div class="step__text">Copia la contraseña tocando el botón <strong>"Copiar"</strong></div>
+        </div>
+        <div class="step">
+            <div class="step__number">2</div>
+            <div class="step__text">Ve a <strong>Ajustes → WiFi</strong> en tu teléfono</div>
+        </div>
+        <div class="step">
+            <div class="step__number">3</div>
+            <div class="step__text">Selecciona <strong>"Clientes Mexican Granny"</strong> y pega la contraseña</div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p class="footer__text">¡Gracias por visitarnos! 🇲🇽</p>
+        <p class="footer__brand">Mexican Granny</p>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">✓ Copiado al portapapeles</div>
+
+    <!-- QR CODE LIBRARY -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN - Modifica estos valores
+        // ============================================
+        const WIFI_CONFIG = {
+            ssid: 'Clientes Mexican Granny',
+            password: 'ClientesMexican1966',
+            security: 'WPA',  // WPA, WEP, o nopass
+            hidden: false
+        };
+
+        const WEBSITE_URL = 'https://mexicangranny.com/';
+
+        // ============================================
+        // GENERAR QR CODE DE WIFI
+        // ============================================
+        function generateWifiQR() {
+            const wifiString = `WIFI:T:${WIFI_CONFIG.security};S:${WIFI_CONFIG.ssid};P:${WIFI_CONFIG.password};H:${WIFI_CONFIG.hidden};;`;
+            
+            const qrContainer = document.getElementById('qrcode');
+            if (qrContainer) {
+                new QRCode(qrContainer, {
+                    text: wifiString,
+                    width: 180,
+                    height: 180,
+                    colorDark: '#1a5c2a',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        }
+
+        // ============================================
+        // COPIAR AL PORTAPAPELES
+        // ============================================
+        function copyText(text, button) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopiedFeedback(button);
+                }).catch(() => {
+                    fallbackCopy(text, button);
+                });
+            } else {
+                fallbackCopy(text, button);
+            }
+        }
+
+        function fallbackCopy(text, button) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCopiedFeedback(button);
+            } catch (err) {
+                showToast('No se pudo copiar');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showCopiedFeedback(button) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<span>✓</span> Copiado';
+            button.classList.add('wifi-field__copy--copied');
+            showToast('✓ Copiado al portapapeles');
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('wifi-field__copy--copied');
+            }, 2000);
+        }
+
+        // ============================================
+        // TOAST NOTIFICATIONS
+        // ============================================
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('toast--visible');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('toast--visible');
+            }, 2000);
+        }
+
+        // ============================================
+        // DETECCIÓN DE iOS
+        // ============================================
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        }
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar QR
+            generateWifiQR();
+            
+            // Mostrar sección iOS si aplica
+            if (isIOS()) {
+                const iosSection = document.getElementById('ios-section');
+                if (iosSection) {
+                    iosSection.classList.remove('hidden-ios');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
