@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador QR WiFi - Mexican Granny</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #1a5c2a;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1a5c2a;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #1a5c2a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #0e3d1a; }
+        .btn-secondary {
+            background: #333;
+            margin-top: 12px;
+        }
+        .btn-secondary:hover { background: #111; }
+        .qr-result {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px dashed #e0e0e0;
+        }
+        .qr-result h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        #qrcode {
+            display: inline-block;
+            padding: 16px;
+            background: white;
+            border: 2px solid #e8e0cc;
+            border-radius: 12px;
+        }
+        #qrcode canvas { display: block; }
+        .wifi-string {
+            margin-top: 16px;
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            color: #333;
+        }
+        .info-box {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 24px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Generador QR WiFi</h1>
+        <p class="subtitle">Genera códigos QR para conexión WiFi. Útil para imprimir o incluir en la landing page.</p>
+
+        <label>Nombre de red (SSID)</label>
+        <input type="text" id="ssid" value="Clientes Mexican Granny">
+
+        <label>Contraseña</label>
+        <input type="text" id="password" value="ClientesMexican1966">
+
+        <label>Tipo de seguridad</label>
+        <select id="security">
+            <option value="WPA" selected>WPA/WPA2/WPA3</option>
+            <option value="WEP">WEP</option>
+            <option value="nopass">Sin contraseña</option>
+        </select>
+
+        <label>Red oculta</label>
+        <select id="hidden">
+            <option value="false" selected>No</option>
+            <option value="true">Sí</option>
+        </select>
+
+        <button class="btn" onclick="generateQR()">Generar QR</button>
+        <button class="btn btn-secondary" onclick="downloadQR()">⬇ Descargar QR como imagen</button>
+
+        <div class="qr-result" id="qr-result" style="display:none;">
+            <h3>📱 Código QR generado</h3>
+            <div id="qrcode"></div>
+            <div class="wifi-string" id="wifi-string"></div>
+        </div>
+
+        <div class="info-box">
+            <strong>📌 Cómo usar este QR:</strong><br>
+            • Imprímelo y colócalo junto a cada tarjeta NFC<br>
+            • Los clientes con iPhone pueden escanearlo con la cámara<br>
+            • En Android 10+, la cámara también lo detecta<br>
+            • Es un complemento perfecto para las tarjetas NFC
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        let qrInstance = null;
+
+        function generateQR() {
+            const ssid = document.getElementById('ssid').value;
+            const password = document.getElementById('password').value;
+            const security = document.getElementById('security').value;
+            const hidden = document.getElementById('hidden').value;
+
+            const wifiString = `WIFI:T:${security};S:${ssid};P:${password};H:${hidden};;`;
+
+            // Clear previous QR
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+
+            qrInstance = new QRCode(qrContainer, {
+                text: wifiString,
+                width: 250,
+                height: 250,
+                colorDark: '#1a5c2a',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('wifi-string').textContent = wifiString;
+            document.getElementById('qr-result').style.display = 'block';
+        }
+
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (!canvas) {
+                alert('Primero genera el QR');
+                return;
+            }
+            const link = document.createElement('a');
+            link.download = 'wifi-mexican-granny-qr.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Generate on load
+        window.addEventListener('DOMContentLoaded', generateQR);
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Metadatos del perfil -->
+    <key>PayloadDisplayName</key>
+    <string>WiFi Mexican Granny - Clientes</string>
+    <key>PayloadDescription</key>
+    <string>Configura automáticamente la conexión WiFi para clientes de Mexican Granny</string>
+    <key>PayloadOrganization</key>
+    <string>Mexican Granny</string>
+    <key>PayloadIdentifier</key>
+    <string>com.mexicangranny.wifi.clientes</string>
+    <key>PayloadUUID</key>
+    <string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+
+    <!-- Configuración WiFi -->
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>PayloadDisplayName</key>
+            <string>WiFi Clientes Mexican Granny</string>
+            <key>PayloadDescription</key>
+            <string>Conexión WiFi para clientes</string>
+            <key>PayloadIdentifier</key>
+            <string>com.mexicangranny.wifi.clientes.wlan</string>
+            <key>PayloadUUID</key>
+            <string>B2C3D4E5-F6A7-8901-BCDE-F12345678901</string>
+            <key>PayloadType</key>
+            <string>com.apple.wifi.managed</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            
+            <!-- Nombre de la red WiFi (SSID) -->
+            <key>SSID_STR</key>
+            <string>Clientes Mexican Granny</string>
+            
+            <!-- La red NO está oculta -->
+            <key>HIDDEN_NETWORK</key>
+            <false/>
+            
+            <!-- Conexión automática -->
+            <key>AutoJoin</key>
+            <true/>
+            
+            <!-- Tipo de cifrado: WPA2/WPA3 -->
+            <key>EncryptionType</key>
+            <string>WPA2</string>
+            
+            <!-- Contraseña -->
+            <key>Password</key>
+            <string>ClientesMexican1966</string>
+            
+            <!-- No es red de paso (hotspot) -->
+            <key>IsHotspot</key>
+            <false/>
+        </dict>
+    </array>
+</dict>
+</plist>
