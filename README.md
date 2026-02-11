@@ -4,7 +4,16 @@
 ---
 
 ## � Bitácora de cambios
+### v2.1 — 11 de febrero de 2026
+**Tarjeta web principal + nuevo fondo**
 
+Cambios realizados:
+- **Nuevo fondo**: Gradientes radiales cálidos (terracota/dorado/verde) reemplazando los orbes verdes fríos. Mesh gradient sutil estilo mexicano.
+- **Tarjeta web principal arriba del todo**: Nueva tarjeta destacada `web-hero` con el logo oficial de Mexican Granny (`logo-mexican-granny.png` cargado desde mexicangranny.com), nombre del restaurante, URL y botón CTA grande "Ver nuestra carta y más" en color terracota.
+- **Logo oficial**: Se muestra el logo real del negocio (72x72px) con fondo blanco y sombra.
+- **Features badges**: Se añadieron 3 mini-badges debajo del botón: "Auténtica", "Recetas caseras", "Desde 1966".
+- **Hero simplificado**: Se eliminó el emoji de taco y se redujo el hero a solo badge WiFi + título "Conéctate al WiFi" + subtítulo. Más limpio y enfocado.
+- **Sección web antigua eliminada**: Se removió la tarjeta pequeña de web que estaba entre WiFi y valoraciones (ahora está arriba como protagonista).
 ### v2.0 — 11 de febrero de 2026
 **Rediseño completo de la landing page + Sección de valoraciones**
 

@@ -26,21 +26,34 @@
         body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
         .ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+        .ambient__mesh{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(180,60,30,0.12),transparent),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(34,197,94,0.06),transparent),radial-gradient(ellipse 50% 50% at 10% 60%,rgba(245,158,11,0.05),transparent)}
         .ambient__orb{position:absolute;border-radius:50%;filter:blur(100px);animation:floatOrb 20s ease-in-out infinite}
-        .ambient__orb--1{width:400px;height:400px;background:var(--accent-green);top:-100px;right:-100px;opacity:.07}
-        .ambient__orb--2{width:300px;height:300px;background:var(--accent-gold);bottom:20%;left:-80px;opacity:.05;animation-delay:-7s}
-        .ambient__orb--3{width:250px;height:250px;background:var(--accent-red);top:50%;right:-60px;opacity:.04;animation-delay:-14s}
+        .ambient__orb--1{width:500px;height:500px;background:linear-gradient(135deg,#b83c1e,#d4582c);top:-200px;left:50%;margin-left:-250px;opacity:.06}
+        .ambient__orb--2{width:300px;height:300px;background:var(--accent-gold);bottom:30%;left:-80px;opacity:.04;animation-delay:-7s}
+        .ambient__orb--3{width:250px;height:250px;background:var(--accent-green);bottom:-50px;right:-60px;opacity:.05;animation-delay:-14s}
         @keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(.95)}}
+
+        .web-hero{display:block;text-decoration:none;color:inherit;background:linear-gradient(145deg,#1c1108 0%,#2a1a0a 40%,#1a0f05 100%);border:1px solid rgba(212,88,44,0.15);border-radius:var(--radius-lg);margin-bottom:18px;overflow:hidden;transition:border-color .3s,transform .2s}
+        .web-hero:active{transform:scale(.985)}
+        .web-hero__inner{display:flex;flex-direction:column;align-items:center;padding:28px 22px 24px;position:relative}
+        .web-hero__glow{position:absolute;top:-40px;left:50%;margin-left:-100px;width:200px;height:100px;background:radial-gradient(ellipse,rgba(212,88,44,0.2),transparent);filter:blur(40px);pointer-events:none}
+        .web-hero__logo{width:72px;height:72px;border-radius:16px;object-fit:contain;margin-bottom:14px;position:relative;z-index:1;background:#fff;padding:4px;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+        .web-hero__title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:4px;position:relative;z-index:1}
+        .web-hero__url{font-size:13px;color:var(--text-secondary);margin-bottom:16px;position:relative;z-index:1}
+        .web-hero__btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 20px;background:linear-gradient(135deg,#d4582c,#b83c1e);color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;position:relative;z-index:1;letter-spacing:.3px;transition:opacity .2s}
+        .web-hero__btn:active{opacity:.85}
+        .web-hero__btn i{width:18px;height:18px}
+        .web-hero__features{display:flex;gap:16px;margin-top:14px;position:relative;z-index:1}
+        .web-hero__feat{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);font-weight:500}
+        .web-hero__feat span{font-size:14px}
 
         .page{position:relative;z-index:1;max-width:440px;margin:0 auto;padding:20px 16px 40px}
 
-        .hero{text-align:center;padding:40px 0 32px}
-        .hero__badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-green-glow);border:1px solid rgba(34,197,94,0.2);color:var(--accent-green);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:50px;margin-bottom:20px}
+        .hero{text-align:center;padding:24px 0 20px}
+        .hero__badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-green-glow);border:1px solid rgba(34,197,94,0.2);color:var(--accent-green);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:50px;margin-bottom:12px}
         .hero__badge i{width:14px;height:14px}
-        .hero__emoji{font-size:56px;margin-bottom:12px;display:block;animation:taco 3s ease-in-out infinite}
-        @keyframes taco{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-6px) rotate(-3deg)}75%{transform:translateY(-3px) rotate(3deg)}}
-        .hero__title{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--text-primary),var(--text-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero__sub{font-size:15px;color:var(--text-secondary);margin-top:8px}
+        .hero__title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--text-primary),var(--text-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero__sub{font-size:14px;color:var(--text-secondary);margin-top:6px}
         .hero__sub span{color:var(--accent-green);font-weight:600}
 
         .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px;overflow:hidden;transition:border-color .3s,transform .2s}
@@ -140,16 +153,32 @@
 </head>
 <body>
     <div class="ambient">
+        <div class="ambient__mesh"></div>
         <div class="ambient__orb ambient__orb--1"></div>
         <div class="ambient__orb ambient__orb--2"></div>
         <div class="ambient__orb ambient__orb--3"></div>
     </div>
     <div class="page">
+        <!-- WEB HERO CARD -->
+        <a href="https://mexicangranny.com/" target="_blank" rel="noopener" class="web-hero fade-in">
+            <div class="web-hero__inner">
+                <div class="web-hero__glow"></div>
+                <img src="https://mexicangranny.com/logo-mexican-granny.png" alt="Mexican Granny" class="web-hero__logo">
+                <div class="web-hero__title">Mexican Granny</div>
+                <div class="web-hero__url">mexicangranny.com</div>
+                <div class="web-hero__btn"><i data-lucide="utensils"></i> Ver nuestra carta y m&aacute;s</div>
+                <div class="web-hero__features">
+                    <div class="web-hero__feat"><span>&#x1F336;&#xFE0F;</span> Aut&eacute;ntica</div>
+                    <div class="web-hero__feat"><span>&#x1F468;&#x200D;&#x1F373;</span> Recetas caseras</div>
+                    <div class="web-hero__feat"><span>&#x1F31F;</span> Desde 1966</div>
+                </div>
+            </div>
+        </a>
+
         <div class="hero">
             <div class="hero__badge"><i data-lucide="wifi"></i> WIFI GRATIS</div>
-            <span class="hero__emoji">&#x1F32E;</span>
-            <h1 class="hero__title">Mexican Granny</h1>
-            <p class="hero__sub">Con&eacute;ctate y disfruta <span>sin l&iacute;mites</span></p>
+            <h1 class="hero__title">Con&eacute;ctate al WiFi</h1>
+            <p class="hero__sub">Internet gratis <span>para clientes</span></p>
         </div>
 
         <div class="card fade-in">
@@ -185,17 +214,6 @@
                 <a href="wifi-mexican-granny.mobileconfig" class="btn-ios"><i data-lucide="smartphone"></i> Conectar WiFi en iPhone</a>
             </div>
         </div>
-
-        <a href="https://mexicangranny.com/" target="_blank" rel="noopener" class="card fade-in" style="text-decoration:none">
-            <div class="action-card">
-                <div class="action-card__icon icon--website"><i data-lucide="globe"></i></div>
-                <div class="action-card__text">
-                    <h3>Nuestra carta y m&aacute;s</h3>
-                    <p>mexicangranny.com</p>
-                </div>
-                <div class="action-card__arrow"><i data-lucide="chevron-right"></i></div>
-            </div>
-        </a>
 
         <div class="divider fade-in">
             <div class="divider__line"></div>
